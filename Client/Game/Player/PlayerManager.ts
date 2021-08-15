@@ -1,6 +1,9 @@
 import { PopupManager } from "../../UI/PopupManager.js";
 import { Player } from "./Player.js";
 
+/**
+ * Manages all the players
+ */
 export class PlayerManager
 {
     static players: Player[];
@@ -24,6 +27,20 @@ export class PlayerManager
             cancelBtn.onclick = this.onCancelBtn;
         if (imgInput)
             imgInput.oninput = this.onImgUpload;
+    }
+
+    /**
+     * Gets a random player
+     * @param isAlive - Whether or not the player is alive
+     */
+    static getRandomPlayer(isAlive: boolean = true): Player
+    {
+        let player = PlayerManager.players[Math.floor(PlayerManager.players.length * Math.random())];
+
+        if (player.isAlive != isAlive)
+            return this.getRandomPlayer(isAlive)
+        else
+            return player;
     }
 
     /**
@@ -88,6 +105,10 @@ export class PlayerManager
         PopupManager.closePopups();
     }
 
+    /**
+     * Updates a list of players
+     * @param listId - ID of the list to update
+     */
     updateList(listId: string): void
     {
         let contestantList = document.getElementById(listId) as HTMLDivElement;

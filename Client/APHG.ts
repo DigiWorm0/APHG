@@ -1,3 +1,4 @@
+import { GameManager } from "./Game/GameManager.js";
 import { PlayerManager } from "./Game/Player/PlayerManager.js";
 import { VERSION } from "./Models/Constants.js";
 
@@ -7,10 +8,12 @@ import { VERSION } from "./Models/Constants.js";
 class APHG
 {
     playerMgr: PlayerManager;
+    gameMgr: GameManager;
 
     constructor()
     {
         this.playerMgr = new PlayerManager();
+        this.gameMgr = new GameManager();
         
         console.log("Initialized APHG v" + VERSION);
     }

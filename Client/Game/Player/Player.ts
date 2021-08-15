@@ -1,3 +1,7 @@
+import { chooseRandomTemplate, START_EVENTS } from "../../Event/Templates/EventTemplateDB.js";
+import { GameManager } from "../GameManager.js";
+import { GameState } from "../GameState.js";
+
 /**
  * Represents a Player/Contestant
  * @param name - Name of the Player
@@ -9,12 +13,50 @@ export class Player
     name: string;
     imageURL: string;
 
+    isAlive: boolean;
+    isInjured: boolean;
+    isSick: boolean;
+
+    foodStat: number;
+
     constructor(name: string, imageURL: string)
     {
         this.id = name + this._generateId() + this._generateId();
         console.log(this.id);
         this.name = name;
         this.imageURL = imageURL;
+
+        this.isAlive = true;
+        this.isInjured = false;
+        this.isSick = false;
+
+        this.foodStat = 8;
+    }
+
+    reset(): void
+    {
+        this.isAlive = true;
+        this.isInjured = false;
+        this.isSick = false;
+
+        this.foodStat = 8;
+    }
+
+    /**
+     * Generates an event for the player
+     */
+    generateEvent(): HTMLDivElement
+    {
+        if (GameManager.state == GameState.Start)
+        {
+            let template = chooseRandomTemplate(START_EVENTS);
+            let event = template.generateEvent(this);
+            return event.generateDiv();
+        }
+        else
+        {
+            return new HTMLDivElement();
+        }
     }
 
     /**
