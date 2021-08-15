@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Unofficial AP Hunger Games</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link href="/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <!--  Header  -->
+        <nav class="navbar navbar-light bg-gray p-0 mb-4">
+            <div class="container">
+                <a class="navbar-brand p-0" href="https://discord.gg/apstudents" target="_blank" rel="noopener noreferrer">
+                    <img src="/images/banner.png" height="48">
+                </a>
+            </div>
+        </nav>
+
+        <!--  Container  -->
+        <div class="container-fluid">
+
+            <!--  Home  -->
+            <div id="game-info">
+                <div class="row">
+                    <div class="col-sm-10 offset-sm-1 text-center">
+                        <h2 class="font-blue">Contestants:</h2>
+                        <hr/>
+                        <div class="m-2" id="contestant-list">
+                            <i>No Contestants</i>
+                        </div>
+                        <hr/>
+                        <button class="btn btn-primary m-1" id="add-player">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-plus-lg me-1 mb-1" viewBox="0 0 16 16">
+                                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                            </svg>
+                            Contestant
+                        </button>
+                        <button class="btn btn-warning m-1" id="start-game">
+                            Start Game
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  Pop-Ups  -->
+        <div id="popup-facade" class="popup-facade d-none"></div>
+
+        <div class="popup list-group text-center popup-hide" id="popup-add-player">
+            <div class="list-group-item bg-blue font-white p-3">
+                <h2>New Contestant:</h2>
+            </div>
+
+            <div class="list-group-item container p-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="form-label fs-4" for="player-name">Name</label>
+                        <input class="form-control" type="text" id="player-name" maxlength="12">
+            
+                        <label class="form-label fs-4 mt-3" for="player-img">Image</label>
+                        <input class="form-control" type="file" id="player-img">
+                    
+                        <button class="btn btn-primary mt-4" id="add-player-done">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-plus-lg me-1 mb-1" viewBox="0 0 16 16">
+                                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                            </svg>
+                            Contestant
+                        </button>
+                        <button class="btn btn-warning mt-4 ms-2" id="add-player-cancel">
+                            Cancel
+                        </button>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="/images/placeholder.jpg" class="float-end" id="add-player-img-preview" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  Footer  -->
+        <footer class="footer bg-light text-secondary pt-3 pb-3 ps-5 pe-5">
+            The Unofficial AP Hunger Games is in no way associated with College Board or Advanced Placement. College Board, Advanced Placement, and other College Board trademarks are trademarks or registered trademarks of College Board or its affiliated in the U.S. and elsewhere.
+            <br/>
+            Made with &#10084; by DigiWorm
+        </footer>
+        <script type="module" src="/JS/APHG.js"></script>
+    </body>
+</html>

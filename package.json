@@ -1,0 +1,21 @@
+{
+  "name": "aphg",
+  "version": "1.0.0",
+  "description": "Unofficial AP Hunger Games",
+  "main": "Build/Server/Server.js",
+  "type": "module",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13"
+  },
+  "scripts": {
+    "build": "tsc --watch",
+    "dev": "node Build/Server/Server.js"
+  },
+  "author": "DigiWorm",
+  "license": "GPL-3.0"
+}
