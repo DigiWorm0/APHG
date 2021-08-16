@@ -12,7 +12,12 @@ body {
 }
 
 .navbar {
-    filter: drop-shadow(0px 1px 2px #0c6c7b)
+    filter: drop-shadow(0px 1px 2px #0c6c7b);
+    height: 48px;
+}
+
+.h-94 {
+    height: 94px;
 }
 
 .footer {
@@ -20,6 +25,14 @@ body {
     font-size: 10px;
     border-top: 3px #fedb00 solid;
     background-color: #1c1c1c !important;
+}
+
+.expand-content {
+    min-height: calc(100vh - 304px);
+}
+
+.disable-overflow {
+    overflow-y: hidden;
 }
 
 /*  Home  */

@@ -6,10 +6,9 @@ export enum EffectType
     None,
     Kill,
     Injure,
-    Sicken,
     GainMedicine,
-    GainTool,
     GainWeapon,
-    GainFood,
-    Heal
+    Heal,
+    JoinTeam,
+    DisbandTeam
 }

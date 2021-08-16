@@ -7,11 +7,13 @@ import { Player } from "./Player.js";
 export class PlayerManager
 {
     static players: Player[];
+    static aliveCount: number;
     static _lastImgUpload?: string;
     
     constructor()
     {
         PlayerManager.players = [];
+        PlayerManager.aliveCount = 0;
         this.onLoad();
 
         window.onbeforeunload = this.onExit;

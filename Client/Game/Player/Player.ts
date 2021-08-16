@@ -1,4 +1,5 @@
-import { chooseRandomTemplate, START_EVENTS } from "../../Event/Templates/EventTemplateDB.js";
+import { EventTemplate } from "../../Event/Templates/EventTemplate.js";
+import { chooseRandomTemplate, HOSTILE_EVENTS, NEUTRAL_EVENTS, START_EVENTS, TEAM_EVENTS2 } from "../../Event/Templates/EventTemplateDB.js";
 import { PlayerUIManager } from "../../UI/PlayerUIManager.js";
 import { GameManager } from "../GameManager.js";
 import { GameState } from "../GameState.js";
@@ -17,13 +18,11 @@ export class Player
 
     isAlive: boolean;
     isInjured: boolean;
-    isSick: boolean;
 
     hasWeapon: boolean;
-    hasTool: boolean;
     hasMedicine: boolean;
 
-    foodStat: number;
+    teammates: Player[];
 
     constructor(name: string, imageURL: string)
     {
@@ -33,13 +32,11 @@ export class Player
 
         this.isAlive = true;
         this.isInjured = false;
-        this.isSick = false;
 
         this.hasMedicine = false;
-        this.hasTool = false;
         this.hasWeapon = false;
 
-        this.foodStat = 8;
+        this.teammates = [];
     }
 
     /**
@@ -49,9 +46,9 @@ export class Player
     {
         this.isAlive = true;
         this.isInjured = false;
-        this.isSick = false;
-
-        this.foodStat = 8;
+        this.hasWeapon = false;
+        this.hasMedicine = false;
+        this.teammates = [];
     }
 
     /**
@@ -59,17 +56,29 @@ export class Player
      */
     generateEvent(): HTMLDivElement
     {
-        if (GameManager.state == GameState.Start)
+        if (PlayerManager.aliveCount <= 1)
+            return new HTMLDivElement();
+        let template: EventTemplate;
+        if (GameManager.state === GameState.Start)
+            template = chooseRandomTemplate(START_EVENTS);
+        else if (GameManager.state === GameState.Day || GameManager.state === GameState.Night)
         {
-            let template = chooseRandomTemplate(START_EVENTS);
-            let event = template.generateEvent(this);
-            event.applyEffects();
-            return event.generateDiv();
+            if (this.teammates.length === 1)
+                template = chooseRandomTemplate(TEAM_EVENTS2);
+            else if (this.hasWeapon)
+                template = chooseRandomTemplate(HOSTILE_EVENTS);
+            else
+                template = chooseRandomTemplate(NEUTRAL_EVENTS);
         }
         else
-        {
             return new HTMLDivElement();
-        }
+
+        if (template.playerCount > PlayerManager.players.length)
+            return this.generateEvent();
+
+        let event = template.generateEvent(this, ...this.teammates);
+        event.applyEffects();
+        return event.generateDiv();
     }
 
     /**

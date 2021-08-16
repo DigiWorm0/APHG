@@ -22,19 +22,19 @@
 
             <!--  Main Menu  -->
             <div id="scene-mainmenu">
-                <div class="row bg-blue text-white p-4">
+                <div class="row bg-blue text-white p-4 h-94">
                     <div class="col-sm-10 offset-sm-1 text-center">
                         <h2>Contestants:</h2>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row expand-content">
                     <div class="col-sm-10 offset-sm-1 text-center">
                         <div class="m-2" id="contestant-list">
                             <i>No Contestants</i>
                         </div>
                     </div>
                 </div>
-                <div class="row bg-gray text-white p-4">
+                <div class="row bg-gray text-white p-4 h-94">
                     <div class="col-sm-10 offset-sm-1 text-center">
                         <button class="btn btn-primary m-1" id="add-player">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-plus-lg me-1 mb-1" viewBox="0 0 16 16">
@@ -49,14 +49,14 @@
                 </div>
             </div>
 
-            <!--  Main Menu  -->
+            <!--  Events  -->
             <div id="scene-events" class="d-none">
-                <div class="row bg-blue text-white p-4">
+                <div class="row bg-blue text-white p-4 h-94">
                     <div class="col-sm-10 offset-sm-1 text-center">
                         <h2 id="title"></h2>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row pt-3 expand-content">
                     <div class="col-sm-10 offset-sm-1 text-center">
                         <p id="desc"></p>
                         <div class="m-2" id="event-list">
@@ -64,10 +64,57 @@
                         </div>
                     </div>
                 </div>
-                <div class="row bg-blue text-white p-4">
+                <div class="row bg-gray text-white p-4 h-94">
                     <div class="col-sm-10 offset-sm-1 text-center">
                         <button class="btn btn-warning m-1" id="continue-game">
-                            Procede
+                            Proceed
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--  Deaths  -->
+            <div id="scene-deaths" class="d-none">
+                <div class="row bg-blue text-white p-4 h-94">
+                    <div class="col-sm-10 offset-sm-1 text-center">
+                        <h2>Fallen Tributes</h2>
+                    </div>
+                </div>
+                <div class="row pt-3 expand-content">
+                    <div class="col-sm-10 offset-sm-1 text-center">
+                        <p id="death-desc"></p>
+                        <div class="m-2" id="death-list">
+                            <i>No Deaths</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row bg-gray text-white p-4 h-94">
+                    <div class="col-sm-10 offset-sm-1 text-center">
+                        <button class="btn btn-warning m-1" id="continue-game-deaths">
+                            Proceed
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--  Winner  -->
+            <div id="scene-winner" class="d-none">
+                <div class="row bg-blue text-white p-4 h-94">
+                    <div class="col-sm-10 offset-sm-1 text-center">
+                        <h2>Winner</h2>
+                    </div>
+                </div>
+                <div class="row pt-3 expand-content">
+                    <div class="col-sm-10 offset-sm-1 text-center">
+                        <div class="m-2" id="winner-list">
+                            <i>Everybody Died</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row bg-gray text-white p-4 h-94">
+                    <div class="col-sm-10 offset-sm-1 text-center">
+                        <button class="btn btn-warning m-1" id="return-game">
+                            Return
                         </button>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import { GameManager } from "../Game/GameManager.js";
 import { Player } from "../Game/Player/Player.js";
+import { PlayerManager } from "../Game/Player/PlayerManager.js";
 import { EffectType } from "./Templates/EffectsType.js";
 import { EventTemplate } from "./Templates/EventTemplate.js";
 
@@ -28,26 +29,32 @@ export class Event
                     break;
                 case EffectType.Kill:
                     player.isAlive = false;
+                    PlayerManager.aliveCount--;
                     GameManager.deathList.push(player);
-                    break;
-                case EffectType.Sicken:
-                    player.isSick = true;
+                    PlayerManager.players.forEach((teammate) => {
+                        let index = teammate.teammates.indexOf(player);
+                        console.log(index);
+                        if (index >= 0)
+                            teammate.teammates.splice(index, 1);
+                    });
                     break;
                 case EffectType.Heal:
                     player.isInjured = false;
-                    player.isSick = false;
                     break;
                 case EffectType.GainWeapon:
                     player.hasWeapon = true;
                     break;
-                case EffectType.GainTool:
-                    player.hasTool = true;
-                    break;
                 case EffectType.GainMedicine:
                     player.hasMedicine = true;
                     break;
-                case EffectType.GainFood:
-                    player.foodStat+=5;
+                case EffectType.JoinTeam:
+                    this.players.forEach((teammate) => {
+                        if (teammate.id != player.id)
+                            player.teammates.push(teammate);
+                    });
+                    break;
+                case EffectType.DisbandTeam:
+                    player.teammates = [];
                     break;
             }
         })
@@ -65,7 +72,9 @@ export class Event
         let text = this.template.text;
         this.players.forEach(((player, index) => {
             divElement.appendChild(player.generateImage(92));
-            text = text.replace("{p" + index + "}", "<span class=\"player-name\">" + player.name + "</span>");
+            let replaceTxt = "{p" + index + "}";
+            while (text.includes(replaceTxt))
+                text = text.replace("{p" + index + "}", "<span class=\"player-name\">" + player.name + "</span>");
         }));
 
         let title = document.createElement("p");

@@ -5,5 +5,6 @@ export enum GameState
     Day,
     Deaths,
     Night,
-    End
+    End,
+    Winner
 }
