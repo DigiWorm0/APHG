@@ -1,4 +1,4 @@
-import { PopupManager } from "../../UI/PopupManager.js";
+import { PlayerUIManager } from "../../UI/PlayerUIManager.js";
 import { Player } from "./Player.js";
 
 /**
@@ -12,21 +12,9 @@ export class PlayerManager
     constructor()
     {
         PlayerManager.players = [];
+        this.onLoad();
 
-        // HTML
-        let addPlayerBtn = document.getElementById("add-player");
-        let finishBtn = document.getElementById("add-player-done");
-        let cancelBtn = document.getElementById("add-player-cancel");
-        let imgInput = document.getElementById("player-img") as HTMLInputElement;
-
-        if (addPlayerBtn)
-            addPlayerBtn.onclick = this.onAddPlayerBtn;
-        if (finishBtn)
-            finishBtn.onclick = this.onFinishPlayerBtn.bind(this);
-        if (cancelBtn)
-            cancelBtn.onclick = this.onCancelBtn;
-        if (imgInput)
-            imgInput.oninput = this.onImgUpload;
+        window.onbeforeunload = this.onExit;
     }
 
     /**
@@ -44,88 +32,54 @@ export class PlayerManager
     }
 
     /**
-     * Executes when the user wants to add a player
+     * Executes when the Window Loads
      */
-    onAddPlayerBtn(): void
+    onLoad(): void
     {
-        PopupManager.openPopup("add-player");
-    }
-
-    /**
-     * Executes when a player's image is uploaded
-     */
-    onImgUpload(): void
-    {
-        let imgInput = document.getElementById("player-img") as HTMLInputElement;
-        let imgFiles = imgInput.files as FileList;
-        if (imgFiles.length < 0)
+        let stringData = localStorage.getItem("playerdata");
+        if (!(stringData))
             return;
-        
-        let file = imgFiles[0];
-        let reader = new FileReader();
-        reader.onload = ((e) => {
-            PlayerManager._lastImgUpload = (e.target as FileReader).result as string;
-
-            let preview = document.getElementById("add-player-img-preview") as HTMLImageElement;
-            preview.src = PlayerManager._lastImgUpload;
+        let data = JSON.parse(stringData) as PlayerData[];
+        if (data.length <= 0)
+            return;
+        data.forEach((player) => {
+            PlayerManager.players.push(new Player(player.n, player.u));
         });
-        reader.readAsDataURL(file);
+        PlayerUIManager.updateList();
     }
 
     /**
-     * Executes when the user wants to finish adding a player
+     * Executes before the Window Exits
      */
-    onFinishPlayerBtn(): void
+    onExit(): void
     {
-        // Check File Upload
-        if (!(PlayerManager._lastImgUpload))
-        {
-            // TODO: Handle no file input
-            console.error("No Files Provided");
-            return;
-        }
-
-        let nameElem = document.getElementById("player-name") as HTMLInputElement;
-
-        PlayerManager.players.push(new Player(
-            nameElem.value,
-            PlayerManager._lastImgUpload
-        ));
-        this.updateList("contestant-list");
-
-        // Close Popup
-        PopupManager.closePopups();
-    }
-
-    /**
-     * Executes when the user wants to cancel adding a player
-     */
-    onCancelBtn(): void
-    {
-        PopupManager.closePopups();
-    }
-
-    /**
-     * Updates a list of players
-     * @param listId - ID of the list to update
-     */
-    updateList(listId: string): void
-    {
-        let contestantList = document.getElementById(listId) as HTMLDivElement;
-        
-        while (contestantList.hasChildNodes())
-            contestantList.removeChild(contestantList.lastChild as ChildNode);
-
+        let data: PlayerData[] = [];
         PlayerManager.players.forEach((player) => {
-            let groupItem = document.createElement("div") as HTMLDivElement;
-            groupItem.classList.add("contestant-thumb");
-            groupItem.appendChild(player.generateImage(130));
-            
-            let title = document.createElement("h5");
-            title.innerText = player.name;
-            groupItem.appendChild(title);
+            data.push({
+                n: player.name,
+                u: player.imageURL
+            });
+        });
 
-            contestantList.appendChild(groupItem);
-        })
+        let stringData = JSON.stringify(data);
+        localStorage.setItem("playerdata", stringData);
+        console.log("Saved Player Data!");
     }
+
+    /**
+     * Deletes a player by their id
+     * @param id - ID of the player to delete
+     */
+    static trash(id: string)
+    {
+        let index = PlayerManager.players.findIndex((player) => { return player.id === id; });
+        PlayerManager.players.splice(index, 1);
+        PlayerUIManager.updateList();
+    }
+}
+
+interface PlayerData
+{
+    n: string,
+    u: string
 }

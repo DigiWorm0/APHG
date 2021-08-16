@@ -1,6 +1,8 @@
 import { chooseRandomTemplate, START_EVENTS } from "../../Event/Templates/EventTemplateDB.js";
+import { PlayerUIManager } from "../../UI/PlayerUIManager.js";
 import { GameManager } from "../GameManager.js";
 import { GameState } from "../GameState.js";
+import { PlayerManager } from "./PlayerManager.js";
 
 /**
  * Represents a Player/Contestant
@@ -17,12 +19,15 @@ export class Player
     isInjured: boolean;
     isSick: boolean;
 
+    hasWeapon: boolean;
+    hasTool: boolean;
+    hasMedicine: boolean;
+
     foodStat: number;
 
     constructor(name: string, imageURL: string)
     {
         this.id = name + this._generateId() + this._generateId();
-        console.log(this.id);
         this.name = name;
         this.imageURL = imageURL;
 
@@ -30,9 +35,16 @@ export class Player
         this.isInjured = false;
         this.isSick = false;
 
+        this.hasMedicine = false;
+        this.hasTool = false;
+        this.hasWeapon = false;
+
         this.foodStat = 8;
     }
 
+    /**
+     * Resets the Player Stats
+     */
     reset(): void
     {
         this.isAlive = true;
@@ -51,6 +63,7 @@ export class Player
         {
             let template = chooseRandomTemplate(START_EVENTS);
             let event = template.generateEvent(this);
+            event.applyEffects();
             return event.generateDiv();
         }
         else
@@ -68,6 +81,8 @@ export class Player
     {
         let imageElem = document.createElement("img") as HTMLImageElement;
         imageElem.src = this.imageURL;
+        if (!this.isAlive)
+            imageElem.classList.add("player-dead");
         if (size)
         {
             imageElem.width = size;

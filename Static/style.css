@@ -8,17 +8,18 @@
 body {
     font-family: "Roboto Slab", sans-serif;
     border-top: 4px solid #009cde;
+    overflow-x: hidden;
 }
 
 .navbar {
-    filter: drop-shadow(0px 1px 2px #aaa);
+    filter: drop-shadow(0px 1px 2px #0c6c7b)
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
     width: 100vw;
     font-size: 10px;
+    border-top: 3px #fedb00 solid;
+    background-color: #1c1c1c !important;
 }
 
 /*  Home  */
@@ -41,6 +42,25 @@ body {
         margin-bottom: 10px;
         border: 1px #ccc solid;
     }
+
+.list-group-item:first-child
+{
+    filter: drop-shadow(0px 1px 2px #515151);
+    z-index: 101;
+}
+
+/*  Trash Icon  */
+
+.trash-icon {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: .2s;
+    cursor: pointer;
+}
+
+.trash-icon:hover {
+    opacity: .7;
+}
 
 /*  Font / Background  */
 
@@ -89,6 +109,10 @@ hr {
 .player-name {
     font-weight: 1000;
     color: #009cde;
+}
+
+.player-dead {
+    filter: grayscale(100%);
 }
 
 /*  Popup  */

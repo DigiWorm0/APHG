@@ -1,6 +1,6 @@
-import { Konami } from "./Konami.js";
 import { SceneManager } from "../UI/SceneManager.js";
 import { GameState } from "./GameState.js";
+import { Player } from "./Player/Player.js";
 import { PlayerManager } from "./Player/PlayerManager.js";
 
 /**
@@ -9,56 +9,18 @@ import { PlayerManager } from "./Player/PlayerManager.js";
 export class GameManager
 {
     static state: GameState;
+    static deathList: Player[];
 
     constructor()
     {
         GameManager.state = GameState.MainMenu;
-
-        let startButton = document.getElementById("start-game") as HTMLButtonElement;
-        startButton.onclick = this.onStartGame.bind(this);
-        document.onkeyup = (e) => {
-            Konami.code(e.keyCode, this.onSecretCode);
-        }
-    }
-
-    /**
-     * Executes when the "Start Game" Button is Pressed
-     */
-    onStartGame(): void
-    {
-        PlayerManager.players.forEach((player) => {
-            player.reset();
-        });
-
-        this.setState(GameState.Start);
-        this.generateEvents("The Blood Bath", "As the tributes stand on their podiums, the horn sounds...");
-    }
-
-    /**
-     * Executes when the secret code is entered
-     */
-    onSecretCode(): void
-    {
-        console.log("Secret Code has been Entered!");
-
-        // Body
-        document.body.style.backgroundColor = "#0f0f0f";
-        document.body.style.color = "#fff";
-        
-        // Nav
-        let nav = document.getElementById("nav") as HTMLElement;
-        nav.setAttribute("style", "background-color: #1c1c1c !important;");
-        nav.style.filter = "drop-shadow(0px 1px 2px #000)";
-
-        // Footer
-        let footer = document.getElementById("footer") as HTMLElement;
-        footer.setAttribute("style", "background-color: #1c1c1c !important;");
+        GameManager.deathList = [];
     }
 
     /**
      * Generate and Display Events
      */
-    generateEvents(title: string, desc: string): void
+    static generateEvents(title: string, desc: string): void
     {
         let eventList = document.getElementById("event-list") as HTMLDivElement;
         let titleElem = document.getElementById("title") as HTMLHeadingElement;
@@ -86,7 +48,7 @@ export class GameManager
      * Sets the current GameState
      * @param state - State to set to
      */
-    setState(state: GameState): void
+    static setState(state: GameState): void
     {
         GameManager.state = state;
 
@@ -100,6 +62,7 @@ export class GameManager
                 break;
             default:
                 SceneManager._closeScenes();
+                break;
         }
     }
 }

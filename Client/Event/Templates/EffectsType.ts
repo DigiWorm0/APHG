@@ -7,5 +7,9 @@ export enum EffectType
     Kill,
     Injure,
     Sicken,
+    GainMedicine,
+    GainTool,
+    GainWeapon,
+    GainFood,
     Heal
 }

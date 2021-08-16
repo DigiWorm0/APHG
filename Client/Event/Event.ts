@@ -1,3 +1,4 @@
+import { GameManager } from "../Game/GameManager.js";
 import { Player } from "../Game/Player/Player.js";
 import { EffectType } from "./Templates/EffectsType.js";
 import { EventTemplate } from "./Templates/EventTemplate.js";
@@ -24,13 +25,30 @@ export class Event
             {
                 case EffectType.Injure:
                     player.isInjured = true;
+                    break;
                 case EffectType.Kill:
                     player.isAlive = false;
+                    GameManager.deathList.push(player);
+                    break;
                 case EffectType.Sicken:
                     player.isSick = true;
+                    break;
                 case EffectType.Heal:
                     player.isInjured = false;
                     player.isSick = false;
+                    break;
+                case EffectType.GainWeapon:
+                    player.hasWeapon = true;
+                    break;
+                case EffectType.GainTool:
+                    player.hasTool = true;
+                    break;
+                case EffectType.GainMedicine:
+                    player.hasMedicine = true;
+                    break;
+                case EffectType.GainFood:
+                    player.foodStat+=5;
+                    break;
             }
         })
     }
@@ -53,7 +71,7 @@ export class Event
         let title = document.createElement("p");
         title.innerHTML = text;
         divElement.appendChild(title);
-
+        
         return divElement;
     }
 }
