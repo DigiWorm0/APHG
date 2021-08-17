@@ -1,0 +1,48 @@
+.playerpopup {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    margin-left: 100vw;
+
+    transition-property: opacity;
+    transition-duration: .2s;
+    z-index: 100;
+}
+
+.playerpopup-background {
+    background-color: black;
+    opacity: .7;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.playerpopup-window {
+    position: absolute;
+    top: 20vh;
+    left: 25vw;
+    width: 50vw;
+
+    background-color: white;
+    opacity: 1;
+
+    border-radius: 10px;
+
+    filter: drop-shadow(0 0 4px #343434)
+}
+
+    .playerpopup-window :first-child {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .playerpopup-window img {
+        border-radius: 10px !important;
+        margin-left: 0 !important;
+    }
+
+.playerpopup-preview {
+    width:23vw;
+    height:23vw;
+}
