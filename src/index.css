@@ -1,0 +1,25 @@
+/*  Container  */
+html, body {
+    margin: 0;
+    font-family: "Roboto Slab", sans-serif;
+    border-top: 4px solid #009cde;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container-stretch {
+    min-height: calc(100vh - 316px);
+}
+
+/*  Background / Text Color Codes  */
+.bg-gray {
+    background-color: #eeeeee !important;
+}
+.bg-blue {
+    background-color: #009cde !important;
+}
+.txt-blue {
+    color: #009cde !important;
+    font-weight: 700;
+}

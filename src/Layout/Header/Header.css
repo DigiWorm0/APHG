@@ -1,0 +1,6 @@
+/*  Navbar  */
+.navbar {
+    filter: drop-shadow(0px 1px 2px #0c6c7b);
+    height: 48px;
+    z-index: 10;
+}
