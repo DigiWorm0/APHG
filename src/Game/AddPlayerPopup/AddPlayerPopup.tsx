@@ -65,11 +65,13 @@ class AddPlayerPopup extends React.Component
                     <TitleBar title="Add Contestant" />
                     <div className="row">
                         <div className="col-sm-6 p-3">
-                            <label className="form-label fs-4" htmlFor="playerpopup-name">Name</label>
-                            <input className="form-control" type="text" id="playerpopup-name" maxLength={12} />
-                
-                            <label className="form-label fs-4 mt-3" htmlFor="playerpopup-img">Image</label>
-                            <input className="form-control" type="file" id="playerpopup-img" onInput={() => this.uploadImg()} />
+                            <form action="#" onSubmit={() => this.add()} >
+                                <label className="form-label fs-4" htmlFor="playerpopup-name">Name</label>
+                                <input className="form-control" type="text" id="playerpopup-name" maxLength={12} />
+
+                                <label className="form-label fs-4 mt-3" htmlFor="playerpopup-img">Image</label>
+                                <input className="form-control" type="file" id="playerpopup-img" onInput={() => this.uploadImg()} />
+                            </form>
                             
                             <button className="btn btn-primary m-2 mt-4" onClick={() => this.add()}>
                                 + Contestant

@@ -6,6 +6,7 @@ import MainMenu from './States/MainMenu';
 import EventView from './States/EventView';
 import DeathView from './States/DeathView';
 import WinnerView from './States/WinnerView';
+import PlayerData from './Player/PlayerData';
 
 class Game extends React.Component
 {
@@ -24,9 +25,43 @@ class Game extends React.Component
         Game.deathList = [];
         Game.aliveCount = 0;
         Game.currentEvents = [];
+        window.onbeforeunload = Game.savePlayers;
         Game.forceUpdate = (() => {
             this.setState({});
         }).bind(this);
+
+        Game.loadPlayers();
+    }
+
+    static savePlayers(): void
+    {
+        console.log("Saving player data...");
+
+        let data: PlayerData[] = [];
+        Game.players.forEach((player) => {
+            data.push({
+                n: player.name,
+                i: player.image
+            });
+        });
+
+        let stringData = JSON.stringify(data);
+        localStorage.setItem("playerdata", stringData);
+    }
+
+    static loadPlayers(): void
+    {
+        let stringData = localStorage.getItem("playerdata");
+        if (!(stringData))
+            return;
+
+        let data = JSON.parse(stringData) as PlayerData[];
+        data.forEach((player) => {
+            Game.players.push(new Player({
+                name: player.n,
+                image: player.i
+            }));
+        });
     }
 
     static getAliveList(): Player[]
@@ -60,7 +95,14 @@ class Game extends React.Component
         Game.forceUpdate();
     }
 
-    static reset()
+    static deletePlayer(player: Player)
+    {
+        let index = Game.players.indexOf(player);
+        Game.players.splice(index, 1);
+        Game.forceUpdate();
+    }
+
+    static resetPlayers()
     {
         Game.aliveCount = this.players.length;
         Game.players.forEach(player => {
@@ -73,7 +115,7 @@ class Game extends React.Component
         console.log(Game.state);
         if (Game.state === GameState.MainMenu)
         {
-            Game.reset();
+            Game.resetPlayers();
             Game.state = GameState.Start;
             Game.generateEvents();
         }
@@ -104,7 +146,7 @@ class Game extends React.Component
         else if (Game.state === GameState.Winner)
         {
             Game.state = GameState.MainMenu;
-            Game.reset();
+            Game.resetPlayers();
         }
 
         console.log(Game.state);

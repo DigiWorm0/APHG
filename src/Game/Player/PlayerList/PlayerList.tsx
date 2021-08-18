@@ -13,10 +13,9 @@ class PlayerList extends React.Component<PlayerListProps>
     render()
     {
         if (this.props.players.length > 0)
-            return (
-                this.props.players.map(player => {
-                    return player.render();
-                }));
+            return (this.props.players.map(player => {
+                        return player.render();
+                    }));
         else
             return (<div className="p-4">
                 <i>{this.props.noPlayerMessage}</i>

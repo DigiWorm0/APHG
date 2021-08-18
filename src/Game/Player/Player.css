@@ -9,3 +9,17 @@
 .player-dead img {
     filter: grayscale(1);
 }
+
+.player-trash {
+    opacity: 0;
+    position: absolute;
+    width:130px;
+    height:130px;
+    transition-property: opacity;
+    transition-duration: .2s;
+    cursor: pointer;
+}
+
+    .player-trash:hover {
+        opacity: .7;
+    }

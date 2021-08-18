@@ -81,6 +81,7 @@ class Player extends React.Component<PlayerProps>
     {
         return (
             <div className={"player" + (this.isAlive ? "" : " player-dead")}>
+                {Game.state === GameState.MainMenu && <img className="player-trash" src="/trash.jpg" onClick={() => Game.deletePlayer(this)} />}
                 <img src={this.image} width="130" height="130" />
                 <h5>{this.name}</h5>
             </div>
