@@ -61,7 +61,7 @@ class Event extends React.Component<EventProps>
                     break;
                 case EffectType.JoinTeam:
                     this.players.forEach((teammate) => {
-                        if (teammate.id != player.id)
+                        if (teammate.id !== player.id)
                             player.teammates.push(teammate);
                     });
                     break;
