@@ -16,7 +16,7 @@ cd APHG
 
 #### Run
 ```
-yarn dev
+yarn start
 ```
 This will open your browser to http://127.0.0.1:3000/
 
