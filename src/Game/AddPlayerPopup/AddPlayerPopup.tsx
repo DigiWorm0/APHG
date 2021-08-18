@@ -10,7 +10,7 @@ class AddPlayerPopup extends React.Component
     constructor(props: any)
     {
         super(props);
-        this.lastImageUpload = "/placeholder.jpg";
+        this.lastImageUpload = "/APHG/placeholder.jpg";
     }
 
     static open()
@@ -81,7 +81,7 @@ class AddPlayerPopup extends React.Component
                             </button>
                         </div>
                         <div className="col-sm-6">
-                            <img className="playerpopup-preview m-2" id="playerpopup-preview" src="/placeholder.jpg"></img>
+                            <img className="playerpopup-preview m-2" id="playerpopup-preview" src="/APHG/placeholder.jpg"></img>
                         </div>
                     </div>
                 </div>

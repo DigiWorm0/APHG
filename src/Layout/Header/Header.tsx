@@ -9,7 +9,7 @@ class Header extends React.Component
             <nav className="navbar navbar-light bg-gray p-0">
                 <div className="container">
                     <a className="navbar-brand p-0" href="/">
-                        <img src="/banner.png" height="48" alt="CollegeBoard AP Hunger Games" />
+                        <img src="/APHG/banner.png" height="48" alt="CollegeBoard AP Hunger Games" />
                     </a>
                 </div>
             </nav>
