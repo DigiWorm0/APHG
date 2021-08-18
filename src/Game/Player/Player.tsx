@@ -60,7 +60,13 @@ class Player extends React.Component<PlayerProps>
         else
             return;
         
-        if (template.playerCount > Game.aliveCount)
+        this.teammates.forEach(teammate => {
+            let index = Game.currentPlayers.indexOf(teammate, 1);
+            if (index >= 0)
+                Game.currentPlayers.splice(index, 1);
+        });
+        
+        if (template.playerCount > Game.currentPlayers.length + 1)
             return this.generateEvent();
 
         let event = template.generateEvent(this, ...this.teammates);

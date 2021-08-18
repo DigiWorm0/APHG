@@ -18,7 +18,7 @@ class MainMenu extends React.Component
                 <TitleBar title="Competitors" />
 
                 <div className="container-stretch">
-                    <PlayerList players={Game.players} noPlayerMessage="There are no competitors"/>
+                    <PlayerList players={Game.allPlayers} noPlayerMessage="There are no competitors"/>
                 </div>
                 
                 <div className="row bg-gray text-white p-4">

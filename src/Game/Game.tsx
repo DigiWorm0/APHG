@@ -11,7 +11,8 @@ import PlayerData from './Player/PlayerData';
 class Game extends React.Component
 {
     static state: GameState;
-    static players: Player[];
+    static allPlayers: Player[];
+    static currentPlayers: Player[];
     static deathList: Player[];
     static currentEvents: Event[];
     static aliveCount: number;
@@ -21,7 +22,8 @@ class Game extends React.Component
     {
         super(props);
         Game.state = GameState.MainMenu;
-        Game.players = [];
+        Game.allPlayers = [];
+        Game.currentPlayers = [];
         Game.deathList = [];
         Game.aliveCount = 0;
         Game.currentEvents = [];
@@ -38,7 +40,7 @@ class Game extends React.Component
         console.log("Saving player data...");
 
         let data: PlayerData[] = [];
-        Game.players.forEach((player) => {
+        Game.allPlayers.forEach((player) => {
             data.push({
                 n: player.name,
                 i: player.image
@@ -57,7 +59,7 @@ class Game extends React.Component
 
         let data = JSON.parse(stringData) as PlayerData[];
         data.forEach((player) => {
-            Game.players.push(new Player({
+            Game.allPlayers.push(new Player({
                 name: player.n,
                 image: player.i
             }));
@@ -66,53 +68,57 @@ class Game extends React.Component
 
     static getAliveList(): Player[]
     {
-        return Game.players.filter(player => player.isAlive);
+        return Game.allPlayers.filter(player => player.isAlive);
     }
 
     static getRandomPlayer(): Player
     {
-        let player = Game.players[Math.floor(Math.random() * Game.players.length)];
-        if (player.isAlive)
-            return player;
-        else
-            return this.getRandomPlayer();
+        let index = Math.floor(Math.random() * Game.currentPlayers.length);
+        let player = Game.currentPlayers[index];
+        Game.currentPlayers.splice(index, 1);
+        return player;
     }
 
     static generateEvents(): void
     {
         let events: Event[] = [];
-        Game.players.forEach(player => {
+        this.currentPlayers = this.getAliveList();
+        while (Game.currentPlayers.length > 0)
+        {
+            let player = this.getRandomPlayer();
             let event = player.generateEvent();
             if (event)
                 events.push(event);
-        });
+        }
         Game.currentEvents = events;
     }
 
     static addPlayer(name: string, image: string)
     {
-        Game.players.push(new Player({ name, image }));
+        Game.allPlayers.push(new Player({ name, image }));
         Game.forceUpdate();
     }
 
     static deletePlayer(player: Player)
     {
-        let index = Game.players.indexOf(player);
-        Game.players.splice(index, 1);
+        let index = Game.allPlayers.indexOf(player);
+        Game.allPlayers.splice(index, 1);
         Game.forceUpdate();
     }
 
     static resetPlayers()
     {
-        Game.aliveCount = this.players.length;
-        Game.players.forEach(player => {
+        Game.aliveCount = this.allPlayers.length;
+        Game.allPlayers.forEach(player => {
             player.reset();
         });
     }
 
     static nextState()
     {
-        console.log(Game.state);
+        setTimeout(() => {
+            window.scrollTo(0,0);
+        }, 100);
         if (Game.state === GameState.MainMenu)
         {
             Game.resetPlayers();

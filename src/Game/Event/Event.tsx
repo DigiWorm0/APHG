@@ -44,7 +44,7 @@ class Event extends React.Component<EventProps>
                     player.isAlive = false;
                     Game.aliveCount--;
                     Game.deathList.push(player);
-                    Game.players.forEach((teammate) => {
+                    Game.allPlayers.forEach((teammate) => {
                         let index = teammate.teammates.indexOf(player);
                         if (index >= 0)
                             teammate.teammates.splice(index, 1);
