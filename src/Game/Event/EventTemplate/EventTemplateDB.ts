@@ -40,32 +40,72 @@ export let START_EVENTS: EventTemplate[] = [
 ];
 
 export let NEUTRAL_EVENTS: EventTemplate[] = [
+
+    // Pointless Tasks
     new EventTemplate("&#127925 ...mining away... &#127925", [], 1),
-    new EventTemplate("{p0} found an old pepsi can on the ground", [], 1),
-    new EventTemplate("{p0} found an old coke can on the ground", [], 1),
+    new EventTemplate("{p0} ", [], 1),
+    new EventTemplate("{p0} kicks an old Pepsi can on the ground", [], 1),
+    new EventTemplate("{p0} kicks an old Coke can on the ground", [], 1),
+    new EventTemplate("{p0} kicks an old Dr.Pepper can on the ground", [], 1),
+    new EventTemplate("{p0} kicks an old Mountain Dew can on the ground", [], 1),
+    new EventTemplate("{p0} kicks an old, empty bottle of water on the ground", [], 1),
     new EventTemplate("{p0} played some ominous background music", [], 1),
     new EventTemplate("{p0} found a book titled 'My Sex Life and Me'", [], 1),
+    new EventTemplate("{p0} found a book titled 'How to Live with a Huge Penis'", [], 1),
+    new EventTemplate("{p0} found a book titled 'Guide to AP Physics C'", [], 1),
+    new EventTemplate("{p0} found a book titled 'Guide to AP Mathematics'", [], 1),
+    new EventTemplate("{p0} found a book titled 'Guide to AP Lang'", [], 1),
+    new EventTemplate("{p0} found a book titled 'Guide to AP Psych'", [], 1),
+    new EventTemplate("{p0} found a book titled 'Guide to AP Bio'", [], 1),
+    new EventTemplate("{p0} found a book titled 'Guide to AP Stats'", [], 1),
+    new EventTemplate("{p0} found a funky dragon in the woods dancing to 'Moves like Jagger' by Maroon 5", [], 1),
+    new EventTemplate("{p0} practiced their jumping jacks", [], 1),
+    new EventTemplate("Bored, {p0} began dancing to the macarena", [], 1),
+    new EventTemplate("{p0} fled from an angry troll", [], 1),
+
+    // Self-Injury
     new EventTemplate("{p0} injured their throat singing 'Hello' by Adele", [EffectType.Injure], 1),
     new EventTemplate("{p0} injured their throat singing 'Bohemian Rhapsody' by Queen", [EffectType.Injure], 1),
-    new EventTemplate("{p0} found a big dragon in the woods dancing to 'Moves like Jagger' by Maroon 5", [], 1),
-    new EventTemplate("While wandering in the woods, Dora the Explorer gave {p0} {weapon}", [EffectType.GainWeapon], 1, "a shotgun"),
-    new EventTemplate("While wandering in the woods, Spongebob gave {p0} {weapon}", [EffectType.GainWeapon], 1, "an AR-15"),
+    new EventTemplate("{p0} tripped on a rock, injuring themselves", [EffectType.Injure], 1),
+
+    // Self-Death
     new EventTemplate("{p0} fell into a random hole in the ground", [EffectType.Kill], 1),
     new EventTemplate("{p0} was abducted by a UFO", [EffectType.Kill], 1),
-    new EventTemplate("{p0} practiced their jumping jacks", [], 1),
+    new EventTemplate("{p0} died while belly-flopping into a piranha-infested lake", [EffectType.Kill], 1),
+    new EventTemplate("{p0} died while belly-flopping into a crocodile-infested lake", [EffectType.Kill], 1),
+    
+    // Hostile
     new EventTemplate("{p0} and {p1} had an aggresive staring contest. {p1} lost.", [EffectType.None, EffectType.Kill], 2),
     new EventTemplate("{p0} and {p1} had an aggresive staring contest. {p0} lost.", [EffectType.Kill], 2),
     new EventTemplate("{p0} tackled {p1} to the ground, but spared their life", [EffectType.None, EffectType.Injure], 2),
     new EventTemplate("{p0} tackled {p1} to the ground and killed them", [EffectType.None, EffectType.Kill], 2),
+    new EventTemplate("{p0} called {p1} a piece of garbage", [EffectType.None, EffectType.Injure], 2),
+
+    // Team
     new EventTemplate("{p0} and {p1} had a staring contest. After several hours of intense staring, they agreed to join forces", [EffectType.JoinTeam, EffectType.JoinTeam], 2),
     new EventTemplate("{p0} answered to {p1}'s repeated bird calls. They both forced a team", [EffectType.JoinTeam, EffectType.JoinTeam], 2),
+
+    // Random Medicine
     new EventTemplate("{p0} found {medicine} hidden in a cave", [EffectType.GainMedicine], 1, "a 55-gallon drum of lube"),
-    new EventTemplate("While hunting in the woords, {p0} found {weapon}", [EffectType.GainWeapon], 1, "The UmiCar from Team Umizoomi"),
-    new EventTemplate("While hunting in the woords, {p0} found {weapon}", [EffectType.GainWeapon], 1, "The Magic School Bus"),
-    new EventTemplate("While hunting in the woords, {p0} found {weapon}", [EffectType.GainWeapon], 1, "an M4 Sherman Tank"),
-    new EventTemplate("While hunting in the woords, {p0} found {weapon}", [EffectType.GainWeapon], 1, "a Ford F-150"),
-    new EventTemplate("While hunting in the woords, {p0} found {weapon}", [EffectType.GainWeapon], 1, "a Pontiac Aztek"),
-    new EventTemplate("While hunting in the woords, {p0} found {weapon}", [EffectType.GainWeapon], 1, "Santa's Sleigh"),
+    new EventTemplate("{p0} found {medicine} hidden in a cave", [EffectType.GainMedicine], 1, "a first-aid kit"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a first-aid kit"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a bowl of Spaghetti-Os"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a McDonalds happy meal"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a jar of pickles"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a jar of mayonaise"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "some medicine"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a bowl of soup"),
+    
+
+    // Random Weapon
+    new EventTemplate("While wandering in the woods, Dora the Explorer gave {p0} {weapon}", [EffectType.GainWeapon], 1, "a shotgun"),
+    new EventTemplate("While wandering in the woods, Spongebob gave {p0} {weapon}", [EffectType.GainWeapon], 1, "an AR-15"),
+    new EventTemplate("While hunting in the woods, {p0} found {weapon}", [EffectType.GainWeapon], 1, "The UmiCar from Team Umizoomi"),
+    new EventTemplate("While hunting in the woods, {p0} found {weapon}", [EffectType.GainWeapon], 1, "The Magic School Bus"),
+    new EventTemplate("While hunting in the woods, {p0} found {weapon}", [EffectType.GainWeapon], 1, "an M4 Sherman Tank"),
+    new EventTemplate("While hunting in the woods, {p0} found {weapon}", [EffectType.GainWeapon], 1, "a Ford F-150"),
+    new EventTemplate("While hunting in the woods, {p0} found {weapon}", [EffectType.GainWeapon], 1, "a Pontiac Aztek"),
+    new EventTemplate("While hunting in the woods, {p0} found {weapon}", [EffectType.GainWeapon], 1, "Santa's Sleigh"),
     new EventTemplate("{p0} found {weapon} hidden in a cave", [EffectType.GainWeapon], 1, "a bowling ball"),
     new EventTemplate("{p0} finds {weapon} which they befriend", [EffectType.GainWeapon], 1, "a snake"),
     new EventTemplate("{p0} finds {weapon} which they befriend", [EffectType.GainWeapon], 1, "a hedgehog"),
@@ -73,13 +113,18 @@ export let NEUTRAL_EVENTS: EventTemplate[] = [
     new EventTemplate("{p0} finds {weapon} which they befriend", [EffectType.GainWeapon], 1, "the Power-Rangers"),
     new EventTemplate("{p0} finds {weapon} which they befriend", [EffectType.GainWeapon], 1, "Batman"),
     new EventTemplate("{p0} finds {weapon} which they befriend", [EffectType.GainWeapon], 1, "The Telitubbies"),
-    new EventTemplate("While hunting in the woords, {p0} found {weapon} in perfect condition", [EffectType.GainWeapon], 1, "a Boeing 747")
+    new EventTemplate("While hunting in the woods, {p0} found {weapon} in perfect condition", [EffectType.GainWeapon], 1, "a Boeing 747")
 ];
 
 export let TEAM_EVENTS: EventTemplate[] = [
+    
+    // Pointless Tasks
     new EventTemplate("{p0} and {p1} held hands for several hours", [], 2),
     new EventTemplate("{p0} watched the entirity of Toy Story 1, 2, 3, and 4 while {p1} did all the work", [], 2),
     new EventTemplate("{p0} and {p1} hunted the other players, but didn't find anyone", [], 2),
+    new EventTemplate("{p0} and {p1} played some parcheesi. Neither of them knew how to play...", [], 2),
+
+    // Hostile
     new EventTemplate("{p0} backstabbed {p1} both physically and metaphorically", [EffectType.None, EffectType.Kill], 2),
     new EventTemplate("{p0} betrayed {p1}'s trust by stabbing them", [EffectType.None, EffectType.Kill], 2),
     new EventTemplate("{p0} and {p1} hunted and killed {p2}", [EffectType.None, EffectType.None, EffectType.Kill], 3),
@@ -89,19 +134,48 @@ export let TEAM_EVENTS: EventTemplate[] = [
     new EventTemplate("{p0} and {p1} played some chess. {p0} lost.", [EffectType.Kill], 2),
     new EventTemplate("{p0} and {p1} played some checkers. {p1} lost.", [EffectType.None, EffectType.Kill], 2),
     new EventTemplate("{p0} and {p1} played some checkers. {p0} lost.", [EffectType.Kill], 2),
-    new EventTemplate("{p0} and {p1} played some parcheesi. Neither of them knew how to play...", [], 2),
+    
+    // Injury
     new EventTemplate("{p0} insulted {p1}'s shoes. The insult was so bad it injured them both", [EffectType.Injure, EffectType.Injure], 2),
     new EventTemplate("{p0} insulted {p1}'s shoes. This physically hurt {p1}", [EffectType.None, EffectType.Injure], 2),
+
+    // Disband
     new EventTemplate("{p0} insulted {p1}'s shoes. After some intense arguments, they decided to disband their team", [EffectType.DisbandTeam, EffectType.DisbandTeam], 2),
-    new EventTemplate("{p0} and {p1} found some abandoned AR-15s on the ground", [EffectType.GainWeapon, EffectType.GainWeapon], 2),
-    new EventTemplate("{p0} and {p1} found an abandoned first-aid kit on the ground", [EffectType.GainMedicine, EffectType.GainMedicine], 2),
-    new EventTemplate("{p0} and {p1} found an abandoned McDonalds happy meal on the ground", [EffectType.GainMedicine, EffectType.GainMedicine], 2),
-    new EventTemplate("{p0} and {p1} found an abandoned McDonalds happy meal on the ground...with the toys!", [EffectType.GainMedicine, EffectType.GainMedicine], 2),
+
+    // Random Weapon
+    new EventTemplate("{p0} and {p1} found {weapon} abandoned on the ground", [EffectType.GainWeapon, EffectType.GainWeapon], 2, "an AR-15"),
+
+    // Random Medicine
+    new EventTemplate("{p0} and {p1} found {medicine} abandoned on the ground", [EffectType.GainMedicine, EffectType.GainMedicine], 2, "a first-aid kit"),
+    new EventTemplate("{p0} and {p1} found {medicine} abandoned on the ground", [EffectType.GainMedicine, EffectType.GainMedicine], 2, "a McDonalds happy meal"),
 ];
 
 export let INJURED_EVENTS: EventTemplate[] = [
+    // Nothing
     new EventTemplate("{p0} is too injured to do anything", [EffectType.None], 1),
-    new EventTemplate("{p0}'s injuries naturally healed over time", [EffectType.Heal], 1)
+    new EventTemplate("{p0} is too injured to do anything", [EffectType.None], 1),
+    new EventTemplate("{p0} is too injured to do anything", [EffectType.None], 1),
+    new EventTemplate("{p0} is too injured to do anything", [EffectType.None], 1),
+    new EventTemplate("{p0} is too injured to do anything", [EffectType.None], 1),
+    new EventTemplate("{p0} is too injured to do anything", [EffectType.None], 1),
+    new EventTemplate("{p0} hummed a sad song to themselves", [EffectType.None], 1),
+    new EventTemplate("{p0} began whistling to the humming birds", [EffectType.None], 1),
+
+    // Recieve Medicine
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a first-aid kit"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "some medicine"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a bowl of Spaghetti-Os"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a McDonalds happy meal"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a jar of pickles"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a jar of mayonaise"),
+    new EventTemplate("{p0} recieved {medicine} from a random sponsor", [EffectType.GainMedicine], 1, "a bowl of soup"),
+
+    // Heal
+    new EventTemplate("{p0}'s injuries naturally healed over time", [EffectType.Heal], 1),
+    new EventTemplate("{p0}'s injuries naturally healed over time", [EffectType.Heal], 1),
+    new EventTemplate("{p0}'s injuries naturally healed over time", [EffectType.Heal], 1),
+    new EventTemplate("{p0}'s used their shirt as a bandage for their injuries", [EffectType.Heal], 1),
+    new EventTemplate("{p0}'s used dark magic to heal their injuries", [EffectType.Heal], 1)
 ];
 
 export let HEALING_EVENTS: EventTemplate[] = [
@@ -110,6 +184,7 @@ export let HEALING_EVENTS: EventTemplate[] = [
 
 export let HOSTILE_EVENTS: EventTemplate[] = [
     new EventTemplate("{p0} hunted the other players, but didn't find anyone", [], 1),
+    new EventTemplate("{p0} injured themselves while searching for other players", [EffectType.Injure], 1),
     new EventTemplate("{p0} chased after {p1} with {weapon}, but {p1} was too fast!", [EffectType.None, EffectType.None], 2),
     new EventTemplate("{p0} hunted and killed {p1} with {weapon}", [EffectType.None, EffectType.Kill], 2),
     new EventTemplate("{p0} hunted and killed both {p1} and {p2} with {weapon}", [EffectType.None, EffectType.Kill, EffectType.Kill], 3),

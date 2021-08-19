@@ -93,6 +93,8 @@ class Player extends React.Component<PlayerProps>
         this.isInjured = false;
         this.hasWeapon = false;
         this.hasMedicine = false;
+        this.medicineName = undefined;
+        this.weaponName = undefined;
         this.teammates = [];
     }
 

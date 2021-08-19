@@ -46,7 +46,7 @@ class Event extends React.Component<EventProps>
         if (!(medicineName))
             medicineName = this.players[0].medicineName;
         if (this.text.includes("{medicine}") && medicineName)
-            this.text = this.text.replace("{medicine}", "<span class=\"txt-green\">" + weaponName + "</span>");
+            this.text = this.text.replace("{medicine}", "<span class=\"txt-green\">" + medicineName + "</span>");
     }
 
     applyEffects()
@@ -62,7 +62,14 @@ class Event extends React.Component<EventProps>
                     player.isAlive = false;
                     Game.aliveCount--;
                     Game.deathList.push(player);
-                    Game.allPlayers.forEach((teammate) => {
+
+                    // Remove Weapons
+                    this.players.forEach(player => {
+                        player.hasWeapon = false;
+                        player.weaponName = undefined;
+                    })
+                    // Wipe Teammates
+                    Game.allPlayers.forEach(teammate => {
                         let index = teammate.teammates.indexOf(player);
                         if (index >= 0)
                             teammate.teammates.splice(index, 1);

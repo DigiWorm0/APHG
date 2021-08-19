@@ -22,7 +22,7 @@ class MainMenu extends React.Component
                     <PlayerList players={Game.allPlayers} noPlayerMessage="There are no competitors"/>
                 </div>
                 
-                <div className={"row text-white p-4 " + (Game.isDarkMode ? "bg-black" : "bg-gray")}>
+                <div className={"row text-white p-4 h-100 " + (Game.isDarkMode ? "bg-black" : "bg-gray")}>
                     <div className="col-sm-12 m-1">
                         <button className="btn btn-primary m-1" onClick={() => AddPlayerPopup.open()}>
                             + Contestant

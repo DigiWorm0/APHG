@@ -59,7 +59,6 @@ class AddCustomEvent extends React.Component
 
         CUSTOM_EVENTS1.push(new EventTemplate(formText, formEffects, this.formPlayerCount, formItem === "" ? undefined : formItem));
         CustomEventPopup.forceUpdate();
-        console.log(CUSTOM_EVENTS1);
         this.close();
     }
 
