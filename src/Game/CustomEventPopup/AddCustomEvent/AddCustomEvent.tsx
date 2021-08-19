@@ -90,13 +90,13 @@ class AddCustomEvent extends React.Component
                 <div className="addcustomevent-background"></div>
 
                 <div className="addcustomevent-window container-fluid">
-                    <TitleBar title="+ Custom Event" />
+                    <TitleBar title="Add Custom Event" />
                     <div className="row">
                         <div className="col-sm-12 p-3">
                             <p><b>Player Names:</b> Type <span className="txt-blue">{"{p0}"}</span> for the first player, <span className="txt-blue">{"{p1}"}</span> for the second player, and so on</p>
                             <p><b>Item Names:</b> Type <span className="txt-green">{"{medicine}"}</span> for the medicine name and <span className="txt-red">{"{weapon}"}</span> for the weapon name.<br/>The actual names of each item is entered into the 'Item Name' box</p>
                             <div className="mb-1 p-1">
-                                <input className="form-control" type="text" id="addcustomevent-text" placeholder="Text (Ex: '{p0} used a {weapon} to kill {p1}')"/>
+                                <input className="form-control" type="text" id="addcustomevent-text" placeholder="Text (Ex: '{p0} used {weapon} to kill {p1}')"/>
                             </div>
                             <div className="mb-1 p-1">
                                 <input className="form-control" type="text" id="addcustomevent-item" placeholder="Item Name (ex: 'A Machete')"/>

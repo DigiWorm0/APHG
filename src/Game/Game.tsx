@@ -8,6 +8,7 @@ import DeathView from './States/DeathView';
 import WinnerView from './States/WinnerView';
 import PlayerData from './Player/PlayerData';
 import { Konami } from './Konami';
+import CustomEventPopup from './CustomEventPopup/CustomEventPopup';
 
 class Game extends React.Component
 {
@@ -31,7 +32,7 @@ class Game extends React.Component
         Game.currentEvents = [];
         Game.isDarkMode = false;
 
-        window.onbeforeunload = Game.savePlayers;
+        window.onbeforeunload = Game.saveAll;
         document.onkeyup = (e) => { Konami.code(e.keyCode, Game.enableDarkMode); }
 
         Game.forceUpdate = (() => {
@@ -54,6 +55,12 @@ class Game extends React.Component
 
         Game.isDarkMode = true;
         Game.forceUpdate();
+    }
+
+    static saveAll(): void
+    {
+        Game.savePlayers();
+        CustomEventPopup.saveEvents();
     }
 
     static savePlayers(): void

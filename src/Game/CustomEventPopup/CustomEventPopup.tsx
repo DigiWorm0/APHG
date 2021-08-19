@@ -1,8 +1,18 @@
 import React from 'react';
 import TitleBar from '../../Layout/TitleBar/TitleBar';
 import AddCustomEvent from './AddCustomEvent/AddCustomEvent';
-import { CUSTOM_EVENTS1 } from '../Event/EventTemplate/EventTemplateDB';
 import './CustomEventPopup.css';
+import EventTemplate from '../Event/EventTemplate/EventTemplate';
+import EffectType from '../Event/EventTemplate/EffectType';
+import { CUSTOM_EVENTS1 } from '../Event/EventTemplate/EventTemplateDB';
+
+interface CustomEventData
+{
+    t: string,
+    e: EffectType[],
+    c: number,
+    d?: string
+}
 
 class CustomEventPopup extends React.Component
 {
@@ -15,6 +25,8 @@ class CustomEventPopup extends React.Component
         CustomEventPopup.forceUpdate = (() => {
             this.setState({});
         }).bind(this);
+
+        CustomEventPopup.loadEvents();
     }
 
     static open()
@@ -22,6 +34,45 @@ class CustomEventPopup extends React.Component
         let popup = document.getElementById("customeventpopup") as HTMLDivElement;
         popup.style.opacity = "1";
         popup.style.marginLeft = "0";
+    }
+
+    static saveEvents(): void
+    {
+        console.log("Saving event data...");
+
+        let data: CustomEventData[] = [];
+        CUSTOM_EVENTS1.forEach(event => {
+            data.push({
+                t: event.text,
+                e: event.effects,
+                c: event.playerCount,
+                d: event.data
+            });
+        });
+
+        let stringData = JSON.stringify(data);
+        localStorage.setItem("eventdata", stringData);
+    }
+
+    static loadEvents(): void
+    {
+        let stringData = localStorage.getItem("eventdata");
+        if (!(stringData))
+            return;
+        if (CUSTOM_EVENTS1.length > 0)
+            return;
+
+        let data = JSON.parse(stringData) as CustomEventData[];
+        data.forEach(event => {
+            CUSTOM_EVENTS1.push(new EventTemplate(
+                event.t,
+                event.e,
+                event.c,
+                event.d
+            ));
+            console.log(event.t);
+        });
+        console.log(CUSTOM_EVENTS1);
     }
 
     close()
