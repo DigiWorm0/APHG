@@ -7,6 +7,7 @@ import EventView from './States/EventView';
 import DeathView from './States/DeathView';
 import WinnerView from './States/WinnerView';
 import PlayerData from './Player/PlayerData';
+import { Konami } from './Konami';
 
 class Game extends React.Component
 {
@@ -17,6 +18,7 @@ class Game extends React.Component
     static currentEvents: Event[];
     static aliveCount: number;
     static forceUpdate: Function;
+    static isDarkMode: boolean;
 
     constructor(props: any)
     {
@@ -27,12 +29,31 @@ class Game extends React.Component
         Game.deathList = [];
         Game.aliveCount = 0;
         Game.currentEvents = [];
+        Game.isDarkMode = false;
+
         window.onbeforeunload = Game.savePlayers;
+        document.onkeyup = (e) => { Konami.code(e.keyCode, Game.enableDarkMode); }
+
         Game.forceUpdate = (() => {
             this.setState({});
         }).bind(this);
 
         Game.loadPlayers();
+    }
+
+    static enableDarkMode(): void
+    {
+        console.log("Secret Code has been Entered!");
+
+        document.body.style.backgroundColor = "#0f0f0f";
+        document.body.style.color = "#fff";
+
+        let grays = document.getElementsByClassName("bg-gray");
+        for (let i = 0; i < grays.length; i++)
+            grays[i].setAttribute("style", "background-color: #1c1c1c !important;");
+
+        Game.isDarkMode = true;
+        Game.forceUpdate();
     }
 
     static savePlayers(): void

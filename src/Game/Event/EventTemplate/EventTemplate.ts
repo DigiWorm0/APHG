@@ -8,12 +8,14 @@ class EventTemplate
     text: string;
     effects: EffectType[];
     playerCount: number;
+    data?: string;
 
-    constructor(text: string, effects: EffectType[], playerCount: number)
+    constructor(text: string, effects: EffectType[], playerCount: number, data?: string)
     {
         this.text = text;
         this.effects = effects;
         this.playerCount = playerCount;
+        this.data = data;
     }
 
     generateEvent(...players: Player[]): Event
@@ -28,7 +30,8 @@ class EventTemplate
 
         let event = new Event({
             template: this,
-            players
+            players,
+            data: this.data
         });
 
         return event;

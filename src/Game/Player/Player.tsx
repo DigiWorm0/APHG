@@ -2,7 +2,7 @@ import React from 'react';
 import GameState from '../GameState';
 import Event from '../Event/Event';
 import EventTemplate from '../Event/EventTemplate/EventTemplate';
-import { chooseRandomTemplate, HOSTILE_EVENTS, NEUTRAL_EVENTS, START_EVENTS, TEAM_EVENTS2 } from '../Event/EventTemplate/EventTemplateDB';
+import { chooseRandomTemplate, HEALING_EVENTS, HOSTILE_EVENTS, INJURED_EVENTS, NEUTRAL_EVENTS, START_EVENTS, TEAM_EVENTS } from '../Event/EventTemplate/EventTemplateDB';
 import Game from '../Game';
 import './Player.css';
 
@@ -22,6 +22,9 @@ class Player extends React.Component<PlayerProps>
     isInjured: boolean;
     hasWeapon: boolean;
     hasMedicine: boolean;
+
+    weaponName?: string;
+    medicineName?: string;
 
     teammates: Player[];
 
@@ -50,9 +53,17 @@ class Player extends React.Component<PlayerProps>
             template = chooseRandomTemplate(START_EVENTS);
         else if (Game.state === GameState.Day || Game.state === GameState.Night)
         {
-            if (this.teammates.length === 1)
-                template = chooseRandomTemplate(TEAM_EVENTS2);
-            else if (this.hasWeapon)
+            if (this.isInjured && this.hasMedicine)
+                template = chooseRandomTemplate(HEALING_EVENTS);
+            else if (this.isInjured)
+                template = chooseRandomTemplate(INJURED_EVENTS)
+            else if (this.teammates.length > 0)
+            {
+                do 
+                    template = chooseRandomTemplate(TEAM_EVENTS);
+                while (template.playerCount !== this.teammates.length + 1)
+            }
+            else if (this.hasWeapon && Math.random() < .5)
                 template = chooseRandomTemplate(HOSTILE_EVENTS);
             else
                 template = chooseRandomTemplate(NEUTRAL_EVENTS);

@@ -17,7 +17,7 @@ class DeathView extends React.Component
                     <PlayerList players={Game.deathList} noPlayerMessage="" />
                 </div>
                 
-                <div className="row bg-gray text-white p-4">
+                <div className={"row text-white p-4 " + (Game.isDarkMode ? "bg-black" : "bg-gray")}>
                     <div className="col-sm-12 m-1">
                         <button className="btn btn-warning m-1" onClick={() => Game.nextState()}>
                             Proceed

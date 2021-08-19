@@ -9,6 +9,7 @@ interface EventProps
 {
     template: EventTemplate;
     players: Player[];
+    data?: string;
 }
 
 class Event extends React.Component<EventProps>
@@ -16,6 +17,7 @@ class Event extends React.Component<EventProps>
     template: EventTemplate;
     players: Player[];
     text: string;
+    data?: string;
 
     constructor(props: EventProps)
     {
@@ -23,12 +25,28 @@ class Event extends React.Component<EventProps>
         this.template = props.template;
         this.players = props.players;
         this.text = this.template.text;
+        this.data = props.data;
+
+        // Players
         this.players.forEach((player, index) => {
             let replace = "{p" + index + "}";
             while (this.text.includes(replace))
                 this.text = this.text.replace(replace, "<span class=\"txt-blue\">" + player.name + "</span>");
-        })
-        
+        });
+
+        // Weapon
+        let weaponName = this.data;
+        if (!(weaponName))
+            weaponName = this.players[0].weaponName;
+        if (this.text.includes("{weapon}") && weaponName)
+            this.text = this.text.replace("{weapon}", "<span class=\"txt-red\">" + weaponName + "</span>");
+
+        // Medicine
+        let medicineName = this.data;
+        if (!(medicineName))
+            medicineName = this.players[0].medicineName;
+        if (this.text.includes("{medicine}") && medicineName)
+            this.text = this.text.replace("{medicine}", "<span class=\"txt-green\">" + weaponName + "</span>");
     }
 
     applyEffects()
@@ -55,9 +73,11 @@ class Event extends React.Component<EventProps>
                     break;
                 case EffectType.GainWeapon:
                     player.hasWeapon = true;
+                    player.weaponName = this.data;
                     break;
                 case EffectType.GainMedicine:
                     player.hasMedicine = true;
+                    player.medicineName = this.data;
                     break;
                 case EffectType.JoinTeam:
                     this.players.forEach((teammate) => {
