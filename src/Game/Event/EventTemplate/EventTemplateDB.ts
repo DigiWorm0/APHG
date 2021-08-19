@@ -6,6 +6,10 @@ export function chooseRandomTemplate(db: EventTemplate[]): EventTemplate
     return db[Math.floor(Math.random() * db.length)];
 }
 
+export let CUSTOM_EVENTS1: EventTemplate[] = [
+
+];
+
 export let START_EVENTS: EventTemplate[] = [
     new EventTemplate("{p0} runs away from the cornucopia", [], 1),
     new EventTemplate("{p0} runs away from the cornucopia", [], 1),

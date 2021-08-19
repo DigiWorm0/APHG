@@ -1,0 +1,43 @@
+.addcustomevent {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    margin-left: 100vw;
+
+    transition-property: opacity;
+    transition-duration: .2s;
+    z-index: 100;
+}
+
+.addcustomevent-background {
+    background-color: black;
+    opacity: .7;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.addcustomevent-window {
+    position: absolute;
+    top: 10vh;
+    left: 15vw;
+    width: 70vw;
+
+    background-color: white;
+    opacity: 1;
+
+    border-radius: 10px;
+
+    filter: drop-shadow(0 0 4px #343434)
+}
+
+    .addcustomevent-window .titlebar {
+        border-radius: 10px 10px 0 0;
+    }
+
+.addcustomevent-scrollwindow {
+    height: calc(80vh - 200px);
+    overflow-y:scroll;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import GameState from '../GameState';
 import Event from '../Event/Event';
 import EventTemplate from '../Event/EventTemplate/EventTemplate';
-import { chooseRandomTemplate, HEALING_EVENTS, HOSTILE_EVENTS, INJURED_EVENTS, NEUTRAL_EVENTS, START_EVENTS, TEAM_EVENTS } from '../Event/EventTemplate/EventTemplateDB';
+import { chooseRandomTemplate, CUSTOM_EVENTS1, HEALING_EVENTS, HOSTILE_EVENTS, INJURED_EVENTS, NEUTRAL_EVENTS, START_EVENTS, TEAM_EVENTS } from '../Event/EventTemplate/EventTemplateDB';
 import Game from '../Game';
 import './Player.css';
 
@@ -65,6 +65,8 @@ class Player extends React.Component<PlayerProps>
             }
             else if (this.hasWeapon && Math.random() < .5)
                 template = chooseRandomTemplate(HOSTILE_EVENTS);
+            else if (Math.random() < .1 && CUSTOM_EVENTS1.length > 0)
+                template = chooseRandomTemplate(CUSTOM_EVENTS1);
             else
                 template = chooseRandomTemplate(NEUTRAL_EVENTS);
         }
